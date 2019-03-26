@@ -24,12 +24,14 @@ You should have received a copy of the GNU General Public License
 along with (Plugin Name). If not, see (http://link to your plugin license).
 */
 
-
+//Inicializamos la funcion
 function twitter_shortcodes_init(){
+  //Creamos el shortcode
   function twitter_shortcode($atts){
     
-    // Attributes
+    // Atributos del shortcode
 	  $atts = shortcode_atts(
+	    //Url por defecto por si no consigue cargar los atributos
 		array(
 			'url' => 'google.es',
 		),
@@ -37,7 +39,7 @@ function twitter_shortcodes_init(){
 	  );
     
     
-    // do something to $content
+    //En el contenido añadimos un blockquote que lo que hace es cargar un tweet en html
     $content = "
     <blockquote class=\"twitter-tweet\" data-lang=\"es\">
     <a href= ".$atts['url'].">Esto es una referencia a twitter</a>
@@ -47,7 +49,9 @@ function twitter_shortcodes_init(){
 
     return $content;
   }
+  //Añadimos el shortcode "tweet" y se lo asignamos a la funcion twitter_shortcode
   add_shortcode('tweet', 'twitter_shortcode');
 }
+//Añadimos la accion init a la funcion twitter_shortcodes_init para inicializarla
 add_action('init', 'twitter_shortcodes_init');
 ?>
